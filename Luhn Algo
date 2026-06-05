@@ -1,0 +1,44 @@
+def verify_card_number(card_number):
+
+    # Remove spaces and dashes
+    card_number = card_number.replace(" ", "").replace("-", "")
+
+    total = 0
+
+    # Reverse the card number for easier processing
+    reversed_digits = card_number[::-1]
+
+    for i in range(len(reversed_digits)):
+
+        digit = int(reversed_digits[i])
+
+        # Double every second digit
+        if i % 2 == 1:
+            digit *= 2
+
+            # If result > 9, subtract 9
+            if digit > 9:
+                digit -= 9
+
+        total += digit
+
+    # Check if total is multiple of 10
+    if total % 10 == 0:
+        return "VALID!"
+    else:
+        return "INVALID!"
+
+
+# ---------------- EXAMPLES ----------------
+
+print(verify_card_number('453914889'))
+# Output: VALID!
+
+print(verify_card_number('4111-1111-1111-1111'))
+# Output: VALID!
+
+print(verify_card_number('453914881'))
+# Output: INVALID!
+
+print(verify_card_number('1234 5678 9012 3456'))
+# Output: INVALID!

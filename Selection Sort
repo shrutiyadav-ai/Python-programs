@@ -1,0 +1,35 @@
+def selection_sort(items):
+
+    # Traverse through the list
+    for i in range(len(items)):
+
+        # Assume current index has the minimum value
+        min_index = i
+
+        # Find the smallest element in remaining unsorted list
+        for j in range(i + 1, len(items)):
+            if items[j] < items[min_index]:
+                min_index = j
+
+        # Swap only if needed
+        if min_index != i:
+            items[i], items[min_index] = items[min_index], items[i]
+
+    return items
+
+
+# ---------------- EXAMPLES ----------------
+
+print(selection_sort([33, 1, 89, 2, 67, 245]))
+# Output: [1, 2, 33, 67, 89, 245]
+
+print(selection_sort([5, 16, 99, 12, 567, 23, 15, 72, 3]))
+# Output: [3, 5, 12, 15, 16, 23, 72, 99, 567]
+
+print(selection_sort([
+    1, 4, 2, 8, 345, 123, 43, 32,
+    5643, 63, 123, 43, 2, 55, 1, 234, 92
+]))
+# Output:
+# [1, 1, 2, 2, 4, 8, 32, 43, 43, 55,
+# 63, 92, 123, 123, 234, 345, 5643]
