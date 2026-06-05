@@ -1,0 +1,100 @@
+class HashTable:
+    def __init__(self):
+        # Initialize empty dictionary
+        self.collection = {}
+
+    def hash(self, string):
+        # Sum Unicode values of characters
+        return sum(ord(char) for char in string)
+
+    def add(self, key, value):
+        hashed_key = self.hash(key)
+
+        # Create nested dictionary if hash doesn't exist
+        if hashed_key not in self.collection:
+            self.collection[hashed_key] = {}
+
+        # Store key-value pair
+        self.collection[hashed_key][key] = value
+
+    def remove(self, key):
+        hashed_key = self.hash(key)
+
+        # Remove only if key exists
+        if hashed_key in self.collection:
+            if key in self.collection[hashed_key]:
+                del self.collection[hashed_key][key]
+
+                # Delete empty hash bucket
+                if not self.collection[hashed_key]:
+                    del self.collection[hashed_key]
+
+    def lookup(self, key):
+        hashed_key = self.hash(key)
+
+        # Return value if key exists
+        if hashed_key in self.collection:
+            return self.collection[hashed_key].get(key)
+
+        return None
+
+
+# ---------------- EXAMPLES ----------------
+
+# Create hash table
+ht = HashTable()
+
+# Example 1: Hash value
+print(ht.hash("golf"))
+# Output: 424
+
+# Example 2: Add key-value pair
+ht.add("golf", "sport")
+print(ht.collection)
+# Output:
+# {424: {'golf': 'sport'}}
+
+# Example 3: Collision handling
+ht.add("dear", "friend")
+ht.add("read", "book")
+
+print(ht.collection)
+# Output:
+# {
+#   424: {'golf': 'sport'},
+#   412: {'dear': 'friend', 'read': 'book'}
+# }
+
+# Example 4: Lookup
+print(ht.lookup("golf"))
+# Output: sport
+
+print(ht.lookup("read"))
+# Output: book
+
+print(ht.lookup("unknown"))
+# Output: None
+
+# Example 5: Remove
+ht.remove("golf")
+
+print(ht.collection)
+# Output:
+# {
+#   412: {'dear': 'friend', 'read': 'book'}
+# }
+
+# Example 6: Same hash collision example
+ht2 = HashTable()
+
+ht2.add("fcc", "coding")
+ht2.add("cfc", "chemical")
+
+print(ht2.collection)
+# Output:
+# {
+#   300: {
+#       'fcc': 'coding',
+#       'cfc': 'chemical'
+#   }
+# }
