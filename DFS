@@ -1,0 +1,66 @@
+def dfs(graph, start):
+
+    # Stack for DFS
+    stack = [start]
+
+    # Keep track of visited nodes
+    visited = []
+
+    while stack:
+
+        # Get the last added node
+        node = stack.pop()
+
+        # Visit node if not already visited
+        if node not in visited:
+            visited.append(node)
+
+            # Add neighbors to stack
+            # Reverse order helps maintain expected traversal order
+            for neighbor in range(len(graph[node]) - 1, -1, -1):
+
+                if graph[node][neighbor] == 1 and neighbor not in visited:
+                    stack.append(neighbor)
+
+    return visited
+
+
+# ---------------- EXAMPLES ----------------
+
+graph1 = [
+    [0, 1, 0, 0],
+    [1, 0, 1, 0],
+    [0, 1, 0, 1],
+    [0, 0, 1, 0]
+]
+
+print(dfs(graph1, 1))
+# Output: [1, 0, 2, 3]
+
+print(dfs(graph1, 3))
+# Output: [3, 2, 1, 0]
+
+
+graph2 = [
+    [0, 1, 0, 0],
+    [1, 0, 1, 0],
+    [0, 1, 0, 0],
+    [0, 0, 0, 0]
+]
+
+print(dfs(graph2, 3))
+# Output: [3]
+
+
+graph3 = [
+    [0, 1, 0, 0],
+    [1, 0, 0, 0],
+    [0, 0, 0, 1],
+    [0, 0, 1, 0]
+]
+
+print(dfs(graph3, 3))
+# Output: [3, 2]
+
+print(dfs(graph3, 0))
+# Output: [0, 1]

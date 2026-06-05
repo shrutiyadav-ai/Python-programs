@@ -1,0 +1,80 @@
+def adjacency_list_to_matrix(graph):
+
+    # Number of nodes
+    size = len(graph)
+
+    # Create size x size matrix filled with 0s
+    matrix = []
+
+    for i in range(size):
+        row = [0] * size
+        matrix.append(row)
+
+    # Fill matrix with edges
+    for node in graph:
+        for neighbor in graph[node]:
+            matrix[node][neighbor] = 1
+
+    # Print each row
+    for row in matrix:
+        print(row)
+
+    # Return matrix
+    return matrix
+
+
+# ---------------- EXAMPLES ----------------
+
+graph1 = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: [2]
+}
+
+result1 = adjacency_list_to_matrix(graph1)
+
+# Output:
+# [0, 1, 1, 0]
+# [0, 0, 1, 0]
+# [1, 0, 0, 1]
+# [0, 0, 1, 0]
+
+print(result1)
+# [[0, 1, 1, 0], [0, 0, 1, 0], [1, 0, 0, 1], [0, 0, 1, 0]]
+
+
+print()
+
+graph2 = {
+    0: [1],
+    1: [0]
+}
+
+result2 = adjacency_list_to_matrix(graph2)
+
+# Output:
+# [0, 1]
+# [1, 0]
+
+print(result2)
+# [[0, 1], [1, 0]]
+
+
+print()
+
+graph3 = {
+    0: [],
+    1: [],
+    2: []
+}
+
+result3 = adjacency_list_to_matrix(graph3)
+
+# Output:
+# [0, 0, 0]
+# [0, 0, 0]
+# [0, 0, 0]
+
+print(result3)
+# [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
