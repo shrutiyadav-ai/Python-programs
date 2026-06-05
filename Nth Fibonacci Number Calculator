@@ -1,0 +1,44 @@
+def fibonacci(n):
+
+    # Initialize sequence list
+    sequence = [0, 1]
+
+    # Handle base cases
+    if n == 0:
+        return sequence[0]
+
+    if n == 1:
+        return sequence[1]
+
+    # Build Fibonacci sequence iteratively
+    for i in range(2, n + 1):
+
+        next_number = sequence[i - 1] + sequence[i - 2]
+
+        sequence.append(next_number)
+
+    return sequence[n]
+
+
+# ---------------- EXAMPLES ----------------
+
+print(fibonacci(0))
+# Output: 0
+
+print(fibonacci(1))
+# Output: 1
+
+print(fibonacci(2))
+# Output: 1
+
+print(fibonacci(3))
+# Output: 2
+
+print(fibonacci(5))
+# Output: 5
+
+print(fibonacci(10))
+# Output: 55
+
+print(fibonacci(15))
+# Output: 610
